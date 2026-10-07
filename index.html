@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>불면증 토끼</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+
+@font-face {
+    font-family: 'OngleipParkDahyeon';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_ParkDaHyun.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body{
+    margin:0;
+    background:#f6f0e8;
+    font-family:'OngleipParkDahyeon', sans-serif;
+    color:#6b564a;
+}
+
+
+/* ========================================
+   전체
+======================================== */
+
+.container{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:55px;
+
+    padding:40px;
+
+}
+
+
+/* ========================================
+   ROOM
+======================================== */
+
+.room-area{
+
+    width:820px;
+
+    max-width:68vw;
+
+}
+
+
+.room-frame{
+
+    position:relative;
+
+    width:100%;
+
+    aspect-ratio:3 / 2;
+
+    overflow:hidden;
+
+    border-radius:12px;
+
+    background:#eadfd5;
+
+}
+
+
+/* ========================================
+   이미지 묶음
+======================================== */
+
+.image-stack{
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:100%;
+    height:100%;
+
+    transition:
+    filter 0.3s;
+
+}
+
+
+.room-image{
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:
+    opacity 0.35s;
+
+}
+
+
+/* 기본 방 */
+
+#roomBase{
+
+    opacity:1;
+
+}
+
+
+/* 커튼 */
+
+#roomCurtain{
+
+    opacity:0;
+
+}
+
+
+/* 스탠드 */
+
+#roomLamp{
+
+    opacity:0;
+
+}
+
+
+/* 잠든 방 */
+
+#roomDark{
+
+    opacity:0;
+
+}
+
+
+/* ========================================
+   따뜻한 색 레이어
+======================================== */
+
+#warmLayer{
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
+
+    background:
+    rgba(
+        255,
+        155,
+        90,
+        0
+    );
+
+    transition:
+    background 0.2s;
+
+}
+
+
+/* ========================================
+   차가운 색 레이어
+======================================== */
+
+#coolLayer{
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
+
+    background:
+    rgba(
+        105,
+        145,
+        200,
+        0
+    );
+
+    transition:
+    background 0.2s;
+
+}
+
+
+/* ========================================
+   설명
+======================================== */
+
+.room-caption{
+
+    margin-top:14px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:16px;
+
+    color:#a28f83;
+
+}
+
+
+.room-caption span:first-child{
+
+    letter-spacing:1px;
+
+}
+
+
+/* ========================================
+   CONTROLS
+======================================== */
+
+.controls{
+
+    width:270px;
+
+    flex-shrink:0;
+
+}
+
+
+h1{
+    font-family:'OngleipParkDahyeon', sans-serif;
+    font-size:36px;
+    font-weight:normal;
+}
+
+
+.subtitle{
+
+    margin-top:8px;
+    margin-bottom:38px;
+
+    font-size:16px;
+
+    color:#a18e82;
+
+    line-height:1.6;
+
+}
+
+
+/* ========================================
+   하나의 RANGE
+======================================== */
+
+.control{
+
+    margin-bottom:27px;
+
+}
+
+
+.label{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:7px;
+
+}
+
+
+.label-name{
+
+    font-size:16px;
+
+    letter-spacing:1px;
+
+}
+
+
+.value{
+
+    font-size:16px;
+
+    color:#ae9b90;
+
+}
+
+
+/* ========================================
+   RANGE 아래 설명
+======================================== */
+
+.range-text{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:7px;
+
+    font-size:12px;
+
+    color:#b9a79d;
+
+    letter-spacing:0.7px;
+
+}
+
+
+/* ========================================
+   RANGE
+======================================== */
+
+input[type="range"]{
+
+    appearance:none;
+
+    width:100%;
+
+    height:3px;
+
+    background:#d9ccc3;
+
+    outline:none;
+
+}
+
+
+input[type="range"]::-webkit-slider-thumb{
+
+    appearance:none;
+
+    width:17px;
+    height:17px;
+
+    border-radius:50%;
+
+    background:#876f61;
+
+    cursor:pointer;
+
+    transition:
+    transform 0.15s;
+
+}
+
+
+input[type="range"]::-webkit-slider-thumb:hover{
+
+    transform:
+    scale(1.15);
+
+}
+
+
+/* ========================================
+   READY 영역
+======================================== */
+
+.ready-area{
+
+    margin-top:35px;
+
+    padding-top:20px;
+
+    border-top:
+    1px solid #d9ccc3;
+
+}
+
+
+.ready-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    color:#9c887c;
+
+}
+
+
+/* 진행바 */
+
+.progress{
+
+    width:100%;
+    height:5px;
+
+    margin-top:10px;
+
+    background:#ded3cb;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+}
+
+
+#progressBar{
+
+    width:0%;
+
+    height:100%;
+
+    background:#9e8273;
+
+    border-radius:10px;
+
+    transition:
+    width 0.3s;
+
+}
+
+
+/* 현재 상태 */
+
+#moodText{
+
+    margin-top:17px;
+
+    font-size:16px;
+
+    line-height:1.5;
+
+}
+
+
+/* ========================================
+   RESET
+======================================== */
+
+#reset{
+
+    margin-top:22px;
+
+    padding:8px 15px;
+
+    border:
+    1px solid #bca99e;
+
+    border-radius:20px;
+
+    background:transparent;
+
+    color:#8b786d;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+}
+
+
+#reset:hover{
+
+    background:#eee4dd;
+
+}
+
+
+/* ========================================
+   반응형
+======================================== */
+
+@media(max-width:900px){
+
+    .container{
+
+        flex-direction:column;
+
+    }
+
+
+    .room-area{
+
+        max-width:100%;
+
+    }
+
+
+    .controls{
+
+        width:90%;
+
+        max-width:500px;
+
+    }
+
+}
+
+/* =========================
+   SOUND
+========================= */
+
+.sound-control{
+
+    width:100%;
+
+    margin-top:14px;
+
+    padding-top:12px;
+
+    border-top:
+    1px solid #d9ccc3;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+
+.sound-title{
+
+    margin-bottom:0;
+
+    margin-right:auto;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+}
+
+
+.sound-buttons{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    flex-wrap:nowrap;
+
+}
+
+
+.sound-buttons button{
+
+    padding:8px 13px;
+
+    border:
+    1px solid #bda99e;
+
+    border-radius:20px;
+
+    background:transparent;
+
+    color:#7f6c62;
+
+    font-family:
+    'OngleipParkDahyeon',
+    sans-serif;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+
+.sound-buttons button:hover{
+
+    background:#eee4dd;
+
+}
+
+
+.sound-buttons button.active{
+
+    background:#8e7467;
+
+    color:white;
+
+}
+/* =========================
+   INTRO
+========================= */
+
+#intro{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:100%;
+    height:100%;
+
+    background:#f6f0e8;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+
+    opacity:1;
+
+    transition:
+    opacity 1s ease;
+
+}
+
+
+.intro-text{
+
+    font-family:
+    'OngleipParkDahyeon',
+    sans-serif;
+
+    font-size:36px;
+
+    color:#6b564a;
+
+    letter-spacing:1px;
+
+}
+
+
+.typing-cursor{
+
+    display:inline-block;
+
+    margin-left:3px;
+
+    animation:
+    blink 0.7s infinite;
+
+}
+
+
+@keyframes blink{
+
+    0%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:0;
+    }
+
+    100%{
+        opacity:1;
+    }
+
+}
+
+
+#intro.hide{
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     INTRO
+========================= -->
+
+<div id="intro">
+
+    <div class="intro-text">
+
+        <span id="typingText"></span>
+
+        <span class="typing-cursor">|</span>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- ========================================
+         ROOM
+    ======================================== -->
+
+    <div class="room-area">
+
+
+        <div class="room-frame">
+
+
+            <div
+                class="image-stack"
+                id="imageStack">
+
+
+                <!-- 기본 -->
+
+                <img
+                    class="room-image"
+                    id="roomBase"
+                    src="images/room.png">
+
+
+                <!-- 커튼 닫힘 -->
+
+                <img
+                    class="room-image"
+                    id="roomCurtain"
+                    src="images/room_curtain.png">
+
+
+                <!-- 커튼 + 스탠드 -->
+
+                <img
+                    class="room-image"
+                    id="roomLamp"
+                    src="images/room_lamp.png">
+
+
+                <!-- 불 꺼짐 + 안대 토끼 -->
+
+                <img
+                    class="room-image"
+                    id="roomDark"
+                    src="images/room_dark.png">
+
+
+            </div>
+
+
+            <div id="warmLayer"></div>
+
+            <div id="coolLayer"></div>
+
+
+        </div>
+
+
+     <div class="room-caption">
+
+    <span>
+        
+    </span>
+
+    <span id="percentText">
+        0% READY
+    </span>
+
+</div>
+
+
+<!-- SOUND -->
+
+<div class="sound-control">
+
+    <div class="sound-title">
+        ASMR 틀어주기
+    </div>
+
+    <div class="sound-buttons">
+
+        <button id="rainButton">
+            빗소리
+        </button>
+
+        <button id="musicButton">
+            자장가
+        </button>
+
+        <button id="nightButton">
+            귀뚜라미
+        </button>
+
+        <button id="pauseButton">
+            조용히
+        </button>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+    <!-- ========================================
+         CONTROLS
+    ======================================== -->
+
+    <div class="controls">
+
+
+        <h1>
+            불면증 토끼를 도와주세요
+        </h1>
+
+
+        <div class="subtitle">
+
+            잠에 편히 들 수 있도록<br>
+            방을 천천히 꾸며주세요
+
+        </div>
+
+
+
+
+
+        <!-- ========================================
+             CURTAIN
+        ======================================== -->
+
+        <div class="control">
+
+
+            <div class="label">
+
+                <span class="label-name">
+                    커든 닫아주기
+                </span>
+
+                <span
+                    class="value"
+                    id="curtainValue">
+                    0
+                </span>
+
+            </div>
+
+
+            <input
+                type="range"
+                id="curtain"
+                min="0"
+                max="100"
+                value="0">
+
+
+            <div class="range-text">
+
+                <span>
+                    OPEN
+                </span>
+
+                <span>
+                    CLOSED
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- ========================================
+             MAIN LIGHT
+        ======================================== -->
+
+        <div class="control">
+
+
+            <div class="label">
+
+                <span class="label-name">
+                    불 꺼주기
+                </span>
+
+                <span
+                    class="value"
+                    id="lightValue">
+                    0
+                </span>
+
+            </div>
+
+
+            <input
+                type="range"
+                id="mainLight"
+                min="0"
+                max="100"
+                value="0">
+
+
+            <div class="range-text">
+
+                <span>
+                    ON
+                </span>
+
+                <span>
+                    OFF
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- ========================================
+             BEDSIDE LAMP
+        ======================================== -->
+
+        <div class="control">
+
+
+            <div class="label">
+
+                <span class="label-name">
+                    무드등 켜주기
+                </span>
+
+                <span
+                    class="value"
+                    id="lampValue">
+                    0
+                </span>
+
+            </div>
+
+
+            <input
+                type="range"
+                id="lamp"
+                min="0"
+                max="100"
+                value="0">
+
+
+            <div class="range-text">
+
+                <span>
+                    OFF
+                </span>
+
+                <span>
+                    ON
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- ========================================
+             WARMTH
+        ======================================== -->
+
+        <div class="control">
+
+
+            <div class="label">
+
+                <span class="label-name">
+                    따뜻하게 해주기
+                </span>
+
+                <span
+                    class="value"
+                    id="warmthValue">
+                    0
+                </span>
+
+            </div>
+
+
+            <input
+                type="range"
+                id="warmth"
+                min="0"
+                max="100"
+                value="0">
+
+
+            <div class="range-text">
+
+                <span>
+                    COOL
+                </span>
+
+                <span>
+                    WARM
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- ========================================
+             SLEEP
+        ======================================== -->
+
+        <div class="control">
+
+
+            <div class="label">
+
+                <span class="label-name">
+                    안대 씌워주기
+                </span>
+
+                <span
+                    class="value"
+                    id="sleepValue">
+                    0
+                </span>
+
+            </div>
+
+
+            <input
+                type="range"
+                id="sleep"
+                min="0"
+                max="100"
+                value="0">
+
+
+            <div class="range-text">
+
+                <span>
+                    WAKE
+                </span>
+
+                <span>
+                    MASK ON
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- ========================================
+             READY
+        ======================================== -->
+
+        <div class="ready-area">
+
+
+            <div class="ready-title">
+
+                <span>
+                잘 준비
+                </span>
+
+                <span id="readyNumber">
+                    0%
+                </span>
+
+            </div>
+
+
+            <div class="progress">
+
+                <div id="progressBar"></div>
+
+            </div>
+
+
+            <div id="moodText">
+
+                아직은 못자겠어
+
+            </div>
+
+
+            <button id="reset">
+
+                토끼 깨우기
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+</div>
+
+
+
+<audio
+    id="rainSound"
+    src="sounds/rain.mp3"
+    loop
+    preload="auto">
+</audio>
+
+<audio
+    id="musicSound"
+    src="sounds/music.mp3"
+    loop
+    preload="auto">
+</audio>
+
+<audio
+    id="nightSound"
+    src="sounds/night.mp3"
+    loop
+    preload="auto">
+</audio>
+
+
+<script>
+
+
+/* ========================================
+   RANGE
+======================================== */
+
+let curtain =
+document.getElementById("curtain");
+
+
+let mainLight =
+document.getElementById("mainLight");
+
+
+let lamp =
+document.getElementById("lamp");
+
+
+let warmth =
+document.getElementById("warmth");
+
+
+let sleep =
+document.getElementById("sleep");
+
+
+
+
+
+/* ========================================
+   IMAGE
+======================================== */
+
+let imageStack =
+document.getElementById("imageStack");
+
+
+let roomCurtain =
+document.getElementById("roomCurtain");
+
+
+let roomLamp =
+document.getElementById("roomLamp");
+
+
+let roomDark =
+document.getElementById("roomDark");
+
+
+let warmLayer =
+document.getElementById("warmLayer");
+
+
+let coolLayer =
+document.getElementById("coolLayer");
+
+
+
+
+
+/* ========================================
+   VALUE
+======================================== */
+
+let curtainValue =
+document.getElementById("curtainValue");
+
+
+let lightValue =
+document.getElementById("lightValue");
+
+
+let lampValue =
+document.getElementById("lampValue");
+
+
+let warmthValue =
+document.getElementById("warmthValue");
+
+
+let sleepValue =
+document.getElementById("sleepValue");
+
+
+
+
+
+/* ========================================
+   READY
+======================================== */
+
+let progressBar =
+document.getElementById("progressBar");
+
+
+let readyNumber =
+document.getElementById("readyNumber");
+
+
+let percentText =
+document.getElementById("percentText");
+
+
+let moodText =
+document.getElementById("moodText");
+
+
+
+
+
+/* ========================================
+   UPDATE
+======================================== */
+
+function updateRoom(){
+
+
+    let c =
+    Number(
+        curtain.value
+    );
+
+
+    let light =
+    Number(
+        mainLight.value
+    );
+
+
+    let l =
+    Number(
+        lamp.value
+    );
+
+
+    let w =
+    Number(
+        warmth.value
+    );
+
+
+    let s =
+    Number(
+        sleep.value
+    );
+
+
+
+
+
+    /* ========================================
+       숫자
+    ======================================== */
+
+    curtainValue.innerText =
+    c;
+
+
+    lightValue.innerText =
+    light;
+
+
+    lampValue.innerText =
+    l;
+
+
+    warmthValue.innerText =
+    w;
+
+
+    sleepValue.innerText =
+    s;
+
+
+
+
+
+    /* ========================================
+       CURTAIN
+
+       room
+       ↓
+       room_curtain
+    ======================================== */
+
+    let curtainOpacity =
+
+    c /
+    100;
+
+
+    roomCurtain.style.opacity =
+    curtainOpacity;
+
+
+
+
+
+    /* ========================================
+       LAMP
+
+       커튼이 어느 정도 닫혀야
+       조명 이미지가 자연스럽게 나타남
+    ======================================== */
+
+    let lampOpacity =
+
+    (
+        l /
+        100
+    )
+
+    *
+
+    (
+        0.3 +
+        curtainOpacity *
+        0.7
+    );
+
+
+    roomLamp.style.opacity =
+    lampOpacity;
+
+
+
+
+
+    /* ========================================
+       MAIN LIGHT OFF
+
+       오른쪽으로 갈수록
+       전체 밝기 감소
+    ======================================== */
+
+    let brightness =
+
+    1 -
+
+    (
+        light /
+        100
+    )
+
+    *
+    0.28;
+
+
+    imageStack.style.filter =
+
+    "brightness(" +
+
+    brightness +
+
+    ")";
+
+
+
+
+
+    /* ========================================
+       WARMTH
+    ======================================== */
+
+    let warmOpacity =
+
+    (
+        w /
+        100
+    )
+
+    *
+    0.10;
+
+
+    let coolOpacity =
+
+    (
+        1 -
+        w /
+        100
+    )
+
+    *
+    0.10;
+
+
+    warmLayer.style.background =
+
+    "rgba(255,155,90," +
+
+    warmOpacity +
+
+    ")";
+
+
+    coolLayer.style.background =
+
+    "rgba(100,140,200," +
+
+    coolOpacity +
+
+    ")";
+
+
+
+
+
+    /* ========================================
+       SLEEP MODE
+
+       마지막에는
+       안대 쓴 토끼 + 어두운 방
+    ======================================== */
+
+    let darkOpacity =
+
+    s /
+    100;
+
+
+    roomDark.style.opacity =
+    darkOpacity;
+
+
+
+
+
+    /* ========================================
+       READY SCORE
+    ======================================== */
+
+    let ready =
+
+    (
+        c +
+        light +
+        l +
+        w +
+        s
+    )
+
+    /
+    5;
+
+
+    ready =
+    Math.round(
+        ready
+    );
+
+
+    progressBar.style.width =
+
+    ready +
+    "%";
+
+
+    readyNumber.innerText =
+
+    ready +
+    "%";
+
+
+    percentText.innerText =
+
+    ready +
+    "% READY";
+
+
+
+
+
+    /* ========================================
+       문장
+    ======================================== */
+
+    if(
+        ready < 20
+    ){
+
+        moodText.innerText =
+        "아직은 못 자겠어";
+
+    }
+
+
+    else if(
+        ready < 40
+    ){
+
+        moodText.innerText =
+        "슬슬 잘 준비를 해볼까";
+
+    }
+
+
+    else if(
+        ready < 65
+    ){
+
+        moodText.innerText =
+        "이제 꽤 포근해";
+
+    }
+
+
+    else if(
+        ready < 85
+    ){
+
+        moodText.innerText =
+        "슬슬 잘 수 있을 것 같아";
+
+    }
+
+
+    else if(
+        ready < 98
+    ){
+
+        moodText.innerText =
+        "잠온다";
+
+    }
+
+
+    else{
+
+        moodText.innerText =
+        "고마워, 너도 잘 자!";
+
+    }
+
+}
+
+
+
+
+
+/* ========================================
+   EVENT
+======================================== */
+
+curtain.oninput =
+updateRoom;
+
+
+mainLight.oninput =
+updateRoom;
+
+
+lamp.oninput =
+updateRoom;
+
+
+warmth.oninput =
+updateRoom;
+
+
+sleep.oninput =
+updateRoom;
+
+
+
+
+
+/* ========================================
+   RESET
+======================================== */
+
+document.getElementById("reset")
+.onclick =
+function(){
+
+
+    curtain.value =
+    0;
+
+
+    mainLight.value =
+    0;
+
+
+    lamp.value =
+    0;
+
+
+    warmth.value =
+    0;
+
+
+    sleep.value =
+    0;
+
+
+    updateRoom();
+
+};
+
+
+
+
+
+updateRoom();
+/* =========================
+   SOUND
+========================= */
+
+let rainSound =
+document.getElementById("rainSound");
+
+let musicSound =
+document.getElementById("musicSound");
+
+let nightSound =
+document.getElementById("nightSound");
+
+
+let rainButton =
+document.getElementById("rainButton");
+
+let musicButton =
+document.getElementById("musicButton");
+
+let nightButton =
+document.getElementById("nightButton");
+
+let pauseButton =
+document.getElementById("pauseButton");
+
+
+
+function stopSounds(){
+
+    rainSound.pause();
+    musicSound.pause();
+    nightSound.pause();
+
+
+    rainButton.classList.remove("active");
+
+    musicButton.classList.remove("active");
+
+    nightButton.classList.remove("active");
+
+}
+
+
+
+rainButton.onclick =
+function(){
+
+    stopSounds();
+
+    rainSound.currentTime =
+    0;
+
+    rainSound.play();
+
+    rainButton.classList.add(
+        "active"
+    );
+
+};
+
+
+
+musicButton.onclick =
+function(){
+
+    stopSounds();
+
+    musicSound.currentTime =
+    0;
+
+    musicSound.play();
+
+    musicButton.classList.add(
+        "active"
+    );
+
+};
+
+
+
+nightButton.onclick =
+function(){
+
+    stopSounds();
+
+    nightSound.currentTime =
+    0;
+
+    nightSound.play();
+
+    nightButton.classList.add(
+        "active"
+    );
+
+};
+
+
+
+pauseButton.onclick =
+function(){
+
+    stopSounds();
+
+};
+
+/* =========================
+   INTRO TYPING
+========================= */
+
+let intro =
+document.getElementById("intro");
+
+
+let typingText =
+document.getElementById("typingText");
+
+
+let introSentence =
+"잠이 너무 안 와서 그러는데,,, 도와줄 수 있어?";
+
+
+let introIndex =
+0;
+
+
+
+function typeIntro(){
+
+
+    if(
+        introIndex <
+        introSentence.length
+    ){
+
+        typingText.innerText +=
+        introSentence[
+            introIndex
+        ];
+
+
+        introIndex++;
+
+
+        setTimeout(
+            typeIntro,
+            150
+        );
+
+    }
+
+
+    else{
+
+
+        /*
+        타이핑 완료 후
+        잠시 기다렸다가
+        메인 화면 등장
+        */
+
+        setTimeout(
+
+            function(){
+
+
+                intro.classList.add(
+                    "hide"
+                );
+
+
+                /*
+                페이드아웃 끝난 후
+                intro 제거
+                */
+
+                setTimeout(
+
+                    function(){
+
+                        intro.style.display =
+                        "none";
+
+                    },
+
+                    1000
+
+                );
+
+
+            },
+
+            900
+
+        );
+
+    }
+
+}
+
+
+
+typeIntro();
+
+</script>
+
+</body>
+
+</html>
